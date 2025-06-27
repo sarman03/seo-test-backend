@@ -32,7 +32,7 @@ app.use(
 app.use('/api', formRoutes);
 
 // Basic route
-app.get('/', (req, res) => {
+app.get(/^\/(?!api).*/, (req, res) => {
   res.send('Hello World!');
 });
 
