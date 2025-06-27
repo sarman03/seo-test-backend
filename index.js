@@ -38,9 +38,10 @@ app.get('/', (req, res) => {
 
 // Serve frontend build
 app.use(express.static(path.join(__dirname, '../frontend/build')));
-app.get(/^\/(?!api).*/, (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
 });
+
 
 // Connect to DB and start server once DB is connected
 mongoose
