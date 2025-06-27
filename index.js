@@ -2,9 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import the cors package
 const formRoutes = require('./routes/formRoutes');
+require('dotenv').config();
+// ... existing code ...
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
+const mongoURI = process.env.MONGO_URI
 
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://yourfrontenddomain.com'], // whitelist
@@ -17,9 +20,13 @@ app.use(cors(corsOptions));
 
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://sarman:sarman@cluster0.xfikpeg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect(mongoURI)
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  })
+  .catch(err => console.log(err));
 
 app.use('/api', formRoutes);
 
