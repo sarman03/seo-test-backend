@@ -2,8 +2,17 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors'); // Import the cors package
 const formRoutes = require('./routes/formRoutes');
+const prerender = require('prerender-node');
 require('dotenv').config();
-// ... existing code ...
+
+// Enable CORS and JSON body parsing
+
+// Setup prerender
+app.use(
+  prerender
+    .set('prerenderToken', 'h6hlaIEOJH9gBtlmTbr6') // Optional if using prerender.io
+    .whitelisted(['/']) // Add more routes if needed
+);
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -36,4 +45,17 @@ app.get('/', (req, res) => {
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
+});
+
+// Serve frontend build
+const path = require('path');
+app.use(express.static(path.join(__dirname, '../frontend/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/build', 'index.html'));
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
