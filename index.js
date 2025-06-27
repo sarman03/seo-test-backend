@@ -12,7 +12,7 @@ const mongoURI = process.env.MONGO_URI;
 
 // CORS Config
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://willowy-chebakia-b11210.netlify.app'],
+  origin: ['http://localhost:3000', 'https://seotestfrontend.netlify.app/'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
