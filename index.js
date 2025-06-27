@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 const mongoURI = process.env.MONGO_URI
 
 const corsOptions = {
-  origin: ['http://localhost:3000', 'https://yourfrontenddomain.com'], // whitelist
+  origin: ['http://localhost:3000', 'https://willowy-chebakia-b11210.netlify.app'], // whitelist
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // allowed methods
   allowedHeaders: ['Content-Type', 'Authorization'], // allowed headers
   credentials: true, // enable cookies/auth headers if needed
